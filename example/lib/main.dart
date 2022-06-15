@@ -60,9 +60,9 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         //Init Floating Action Bubble
         floatingActionButton: FloatingActionBubble(
           // Menu items
-          height: 100,
+          height: 300,
           items: List.generate(
-            50,
+            14,
             (index) => Bubble(
               title: "Settings",
               bubbleColor: Colors.blue,

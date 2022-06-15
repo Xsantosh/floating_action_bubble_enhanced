@@ -129,21 +129,27 @@ class FloatingActionBubble extends AnimatedWidget {
       children: [
         SizedBox(
           height: height,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IgnorePointer(
-                  ignoring: _animation.value == 0,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    itemCount: items.length,
-                    itemBuilder: buildItem,
+          child: Container(
+            color: Colors.amber,
+            child: SingleChildScrollView(
+              reverse: true,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  IgnorePointer(
+                    ignoring: _animation.value == 0,
+                    child: ListView.builder(
+                      reverse: true,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      itemCount: items.length,
+                      itemBuilder: buildItem,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
