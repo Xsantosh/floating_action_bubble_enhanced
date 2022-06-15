@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
         child: MyHomePage(
           title: 'Floating Action Bubble Demo',
         ),
@@ -32,8 +32,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
-    with SingleTickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
   Animation<double> _animation;
   AnimationController _animationController;
 
@@ -44,8 +43,7 @@ class _MyHomePageState extends State<MyHomePage>
       duration: const Duration(milliseconds: 260),
     );
 
-    final curvedAnimation =
-        CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
+    final curvedAnimation = CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
 
     super.initState();
@@ -62,45 +60,18 @@ class _MyHomePageState extends State<MyHomePage>
         //Init Floating Action Bubble
         floatingActionButton: FloatingActionBubble(
           // Menu items
-          items: <Bubble>[
-            // Floating action menu item
-            Bubble(
+          height: 100,
+          items: List.generate(
+            50,
+            (index) => Bubble(
               title: "Settings",
-              iconColor: Colors.white,
               bubbleColor: Colors.blue,
-              icon: Icons.settings,
               titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
               onPress: () {
                 _animationController.reverse();
               },
             ),
-            // Floating action menu item
-            Bubble(
-              title: "Profile",
-              iconColor: Colors.white,
-              bubbleColor: Colors.blue,
-              icon: Icons.people,
-              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-              onPress: () {
-                _animationController.reverse();
-              },
-            ),
-            //Floating action menu item
-            Bubble(
-              title: "Home",
-              iconColor: Colors.white,
-              bubbleColor: Colors.blue,
-              icon: Icons.home,
-              titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
-              onPress: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => const Homepage()));
-                _animationController.reverse();
-              },
-            ),
-          ],
+          ),
 
           // animation controller
           animation: _animation,

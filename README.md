@@ -1,11 +1,10 @@
-# Floating Action Bubble 
-[![Pub](https://img.shields.io/pub/v/fab_circular_menu.svg)](https://pub.dev/packages/floating_action_bubble)
-[![Pull Requests are welcome](https://img.shields.io/badge/license-MIT-blue)](https://github.com/marianocordoba/fab-circular-menu/blob/master/LICENSE)
-[![Codemagic build status](https://api.codemagic.io/apps/5e9371f31838ac3981fd1397/5e9371f31838ac3981fd1396/status_badge.svg)](https://codemagic.io/apps/5e9371f31838ac3981fd1397/5e9371f31838ac3981fd1396/latest_build)
+# Floating Action Bubble
 
+<!-- [![Pub](https://img.shields.io/pub/v/fab_circular_menu.svg)](https://pub.dev/packages/floating_action_bubble) -->
+
+[![Pull Requests are welcome](https://img.shields.io/badge/license-MIT-blue)](https://github.com/marianocordoba/fab-circular-menu/blob/master/LICENSE)
 
 A Flutter package to create a animated menu using a Floating Action Button.
-
 
 ![Showcase](https://imgur.com/IbinJsI.gif)
 
@@ -49,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
 
   @override
   void initState(){
-        
+
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 260),
@@ -57,23 +56,23 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
 
     final curvedAnimation = CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
-    
-    
+
+
     super.initState();
 
 
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      
+
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      
-      //Init Floating Action Bubble 
+
+      //Init Floating Action Bubble
       floatingActionButton: FloatingActionBubble(
         // Menu items
         items: <Bubble>[
@@ -121,12 +120,12 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         onPress: () => _animationController.isCompleted
               ? _animationController.reverse()
               : _animationController.forward(),
-        
+
         // Floating Action button Icon color
         iconColor: Colors.blue,
 
-        // Flaoting Action button Icon 
-        iconData: Icons.ac_unit, 
+        // Flaoting Action button Icon
+        iconData: Icons.ac_unit,
         backGroundColor: Colors.white,
       )
     );
@@ -141,19 +140,17 @@ You can check for a more complete example in the [example](https://github.com/Da
 
 You can customize the widget appareance using the following properties:
 
-| Property  | Description |
-|----------|-------------|
-| fabColor | Sets the FAB color |
-| fabIcon | Sets the FAB icon |
-| BubbleTitle | Sets the menu item title |
-| BubbleTitleStyle | Sets the menu item title style |
-| BubbleIcon | Sets the menu  item icon |
-| BubbleIconColor | Sets the menu item icon color |
-| BubbleColor | Sets the menu item color |
-| animation| Allows to animated the menu items |
-
-
+| Property         | Description                       | Required? |
+| ---------------- | --------------------------------- | --------- |
+| fabColor         | Sets the FAB color                |
+| fabIcon          | Sets the FAB icon                 |
+| BubbleTitle      | Sets the menu item title          |
+| BubbleTitleStyle | Sets the menu item title style    |
+| BubbleIcon       | Sets the menu item icon           | optional  |
+| BubbleIconColor  | Sets the menu item icon color     | optional  |
+| BubbleColor      | Sets the menu item color          |
+| animation        | Allows to animated the menu items |
 
 ## Contributing
 
-If you want to contribute to this project, please submit a PR to the development branch Thank you 😁
+If you want to contribute to this project, let me know by mail: xsantosh7 gmail

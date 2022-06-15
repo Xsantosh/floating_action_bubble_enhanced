@@ -4,14 +4,14 @@ class Bubble {
   const Bubble({
     required this.title,
     required this.titleStyle,
-    required this.iconColor,
+    this.iconColor,
     required this.bubbleColor,
-    required this.icon,
+    this.icon,
     required this.onPress,
   });
 
-  final IconData icon;
-  final Color iconColor;
+  final IconData? icon;
+  final Color? iconColor;
   final Color bubbleColor;
   final void Function() onPress;
   final String title;
@@ -25,31 +25,38 @@ class BubbleMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      shape: const StadiumBorder(),
-      padding: const EdgeInsets.only(top: 11, bottom: 13, left: 32, right: 32),
-      color: item.bubbleColor,
-      splashColor: Colors.grey.withOpacity(0.1),
-      highlightColor: Colors.grey.withOpacity(0.1),
-      elevation: 2,
-      highlightElevation: 2,
-      disabledColor: item.bubbleColor,
-      onPressed: item.onPress,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Icon(
-            item.icon,
-            color: item.iconColor,
-          ),
-          const SizedBox(
-            width: 10.0,
-          ),
-          Text(
-            item.title,
-            style: item.titleStyle,
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2.0),
+      child: MaterialButton(
+        shape: const StadiumBorder(),
+        padding: const EdgeInsets.only(top: 11, bottom: 13, left: 32, right: 32),
+        color: item.bubbleColor,
+        splashColor: Colors.grey.withOpacity(0.1),
+        highlightColor: Colors.grey.withOpacity(0.1),
+        elevation: 2,
+        highlightElevation: 2,
+        disabledColor: item.bubbleColor,
+        onPressed: item.onPress,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            item.icon != null
+                ? Icon(
+                    item.icon,
+                    color: item.iconColor,
+                  )
+                : const SizedBox(),
+            item.icon != null
+                ? const SizedBox(
+                    width: 10.0,
+                  )
+                : const SizedBox(),
+            Text(
+              item.title,
+              style: item.titleStyle,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -64,6 +71,7 @@ class _DefaultHeroTag {
 class FloatingActionBubble extends AnimatedWidget {
   const FloatingActionBubble({
     Key? key,
+    required this.height,
     required this.items,
     required this.onPress,
     required this.iconColor,
@@ -75,7 +83,7 @@ class FloatingActionBubble extends AnimatedWidget {
   })  : assert((iconData == null && animatedIconData != null) ||
             (iconData != null && animatedIconData == null)),
         super(listenable: animation, key: key);
-
+  final double height;
   final List<Bubble> items;
   final void Function() onPress;
   final AnimatedIconData? animatedIconData;
@@ -102,9 +110,7 @@ class FloatingActionBubble extends AnimatedWidget {
     );
 
     return Align(
-      alignment: textDirection == TextDirection.ltr
-          ? Alignment.centerRight
-          : Alignment.centerLeft,
+      alignment: textDirection == TextDirection.ltr ? Alignment.centerRight : Alignment.centerLeft,
       child: Transform(
         transform: transform,
         child: Opacity(
@@ -121,15 +127,24 @@ class FloatingActionBubble extends AnimatedWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        IgnorePointer(
-          ignoring: _animation.value == 0,
-          child: ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            separatorBuilder: (_, __) => const SizedBox(height: 12.0),
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            itemCount: items.length,
-            itemBuilder: buildItem,
+        SizedBox(
+          height: height,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IgnorePointer(
+                  ignoring: _animation.value == 0,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    itemCount: items.length,
+                    itemBuilder: buildItem,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         FloatingActionButton(
