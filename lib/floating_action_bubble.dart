@@ -131,6 +131,7 @@ class FloatingActionBubble extends AnimatedWidget {
           height: height,
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               mainAxisSize: MainAxisSize.min,
               children: [
                 IgnorePointer(
