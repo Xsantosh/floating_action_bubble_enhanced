@@ -127,17 +127,17 @@ class FloatingActionBubble extends AnimatedWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        SizedBox(
-          height: height,
-          child: SingleChildScrollView(
-            reverse: true,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IgnorePointer(
-                  ignoring: _animation.value == 0,
-                  child: ListView.builder(
+        IgnorePointer(
+          ignoring: _animation.value == 0,
+          child: SizedBox(
+            height: height,
+            child: SingleChildScrollView(
+              reverse: true,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ListView.builder(
                     reverse: true,
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -145,8 +145,8 @@ class FloatingActionBubble extends AnimatedWidget {
                     itemCount: items.length,
                     itemBuilder: buildItem,
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
