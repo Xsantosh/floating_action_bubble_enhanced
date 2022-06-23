@@ -132,6 +132,7 @@ class FloatingActionBubble extends AnimatedWidget {
           child: SingleChildScrollView(
             reverse: true,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
